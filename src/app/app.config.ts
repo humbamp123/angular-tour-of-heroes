@@ -1,8 +1,12 @@
 import { ApplicationConfig } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { Routes, provideRouter, withDebugTracing } from '@angular/router';
+import { HeroesComponent } from './heroes/heroes.component';
 
-import { routes } from './app.routes';
+const routes: Routes = [
+  { path: 'heroes', component: HeroesComponent },
+  { path: '', redirectTo: '/heroes', pathMatch: 'full' },
+];
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes)]
+  providers: [provideRouter(routes, withDebugTracing())],
 };
