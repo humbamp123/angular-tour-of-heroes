@@ -15,14 +15,18 @@ import { HeroService } from '../hero.service';
 export class HeroDetailComponent {
   @Input() hero?: Hero;
 
+  save(): void {
+    if (this.hero) {
+      this.heroService.updateHero(this.hero).subscribe(() => this.goBack());
+    }
+  }
+
   ngOnInit(): void {
     this.getHero();
   }
 
   getHero(): void {
-    console.log('GET HERO');
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    console.log(id);
     this.heroService.getHero(id).subscribe((hero) => (this.hero = hero));
   }
 
